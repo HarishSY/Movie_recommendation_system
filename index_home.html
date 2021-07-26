@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Movie Recommender - Harish</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins:300,500&amp;display=swap'>
+<style>
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 100%;
+    background-color: #F1FDFF;
+  line-height: 1.5;
+  color: #000;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+figure {
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+.js-overflow {
+  overflow: hidden;
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
+.bg-black {
+  background-color: #000;
+}
+
+.absolute-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  height: 100%;
+  width: 100%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+    
+    .movie{
+        height: 70vh;
+        margin-top: 15vh;
+        margin-bottom: 15vh;
+        margin-right: 5vh;
+        margin-left: 5vh;
+        display: block;
+        background-color: white;
+        border-radius: 20px;
+        padding: 1em;
+        width: auto;
+        box-shadow: 0px 0px 10px -4px grey;
+        text-align: center;
+    }
+    #movie_name{
+        width: 70%;
+        padding: 1em;
+        border-radius: 5px;
+        text-align: center;
+        border: 1px solid grey;
+    }
+    #submission_button{
+        width: 25%;
+        padding: 1em;
+        margin: 1em;
+        border-radius: 5px;
+        color: white;
+        background-color:dodgerblue;
+        border-style: none;
+    }
+    @media screen and (max-width:600px) {
+        .movie{
+            margin-top: 12vh;
+            margin-bottom: 12vh;
+        }
+}
+</style>
+</head>
+<body>
+
+
+<!-- Demo -->
+    <div class="movie">
+        <h2><u>Movie Recommendation System</u></h2>
+        <form action="{{ url_for('movie') }}" method="POST">
+            <input type="text" id="movie_name" name="movie_name" placeholder="Enter a full movie name" required />
+            <input type="submit" id="submission_button" value="Submit"/>
+      
+<!-- partial -->
+  <script src='https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js'></script>
+<script>
+
+  
+
+      // Opening transition
+      if (s.body.hasClass(s.open)) {
+        s.prevWidth = width;
+
+        anime.timeline({
+          easing: 'easeOutQuart',
+          duration: 600,
+          begin() {
+            $('.menu__img').css('left', `${width}%`);
+            s.body.addClass(s.visible);
+          } }).
+
+        add({
+          targets: '.menu__container',
+          width: [0, `${width}%`] }).
+
+        add({
+          targets: '.menu__img',
+          width: [0, `${100 - width}%`] },
+        0);
+      }
+
+      // Closing transition
+      if (!s.body.hasClass(s.open)) {
+        anime.timeline({
+          easing: 'easeInQuart',
+          duration: 600,
+          delay: 200,
+          complete() {
+            s.body.removeClass(s.visible);
+          } }).
+
+        add({
+          targets: '.menu__container',
+          width: [`${s.prevWidth}%`, 0] }).
+
+        add({
+          targets: '.menu__img',
+          width: [`${100 - s.prevWidth}%`, 0] },
+        0);
+      }
+    } };
+
+})();
+
+// Inits
+$(() => {
+  // Spanize
+  const span = $('.js-span');
+  let $ele, words;
+
+  for (let i = 0; i < span.length; i++) {
+    $ele = $(span).eq(i);
+    words = $ele.html();
+
+    $ele.html(words.replace(/([A-z0-9'@+-<>.,'"“”‘’?!*&/]+)/g, '<span>$&</span>'));
+  }
+
+  Menu.init();
+});    
+</script>
+
+</body>
+</html>
